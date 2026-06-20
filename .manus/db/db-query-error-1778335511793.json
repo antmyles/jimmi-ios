@@ -1,0 +1,8 @@
+{
+  "query": "ALTER TABLE jimmi_profiles ADD COLUMN targetWeight int NULL AFTER weight;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway06.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 4MfKkRv4BtcjpAV.27131ce48b0a --database nkB3BF7vCNJASAUzbYZAhY --execute ALTER TABLE jimmi_profiles ADD COLUMN targetWeight int NULL AFTER weight;",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1146 (42S02) at line 1: Table 'nkb3bf7vcnjasauzbyzahy.jimmi_profiles' doesn't exist"
+  ]
+}

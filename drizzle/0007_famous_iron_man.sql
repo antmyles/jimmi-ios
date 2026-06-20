@@ -1,0 +1,1 @@
+ALTER TABLE `jimmiProfiles` ADD `dietaryPreferences` text;

@@ -1,0 +1,118 @@
+/*
+ * JIMMI Orb design philosophy: Monastic Tech Minimalism, d378fb02 frameless float revision.
+ * Styling should feel like a quiet black-label instrument: transparent touch stage, structured particle realism, precise focus, and restrained motion.
+ */
+
+.jimmi-orb {
+  --jimmi-orb-size: 220px;
+  position: relative;
+  width: var(--jimmi-orb-size);
+  height: var(--jimmi-orb-size);
+  min-width: 120px;
+  min-height: 120px;
+  border: 0;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  appearance: none;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+  contain: layout style paint;
+  isolation: isolate;
+  transform: translateZ(0);
+  transition: filter 220ms ease;
+}
+
+.jimmi-orb:hover {
+  filter: saturate(1.02) brightness(1.05);
+}
+
+.jimmi-orb:focus-visible {
+  outline: 1px solid rgba(255, 255, 255, 0.78);
+  outline-offset: 8px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 0 46px rgba(255, 255, 255, 0.08);
+}
+
+.jimmi-orb__canvas {
+  position: absolute;
+  inset: 0;
+  border-radius: 0;
+  overflow: visible;
+}
+
+.jimmi-orb__fallback {
+  position: absolute;
+  inset: 16%;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle, rgba(245, 237, 222, 0.11) 1px, transparent 1.7px) 0 0 / 11px 11px,
+    radial-gradient(circle at 50% 50%, rgba(245, 237, 222, 0.045), transparent 70%);
+  box-shadow: 0 0 24px rgba(245, 237, 222, 0.045);
+  opacity: 0.045;
+  transform: scale(1);
+  transition: transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 240ms ease, filter 240ms ease;
+}
+
+.jimmi-orb__fallback::before,
+.jimmi-orb__fallback::after {
+  content: "";
+  position: absolute;
+  inset: -9%;
+  border-radius: inherit;
+  border: 0;
+  opacity: 0;
+}
+
+.jimmi-orb__fallback::after {
+  inset: 11%;
+  border-color: transparent;
+  filter: none;
+}
+
+.jimmi-orb[data-state="listening"] .jimmi-orb__fallback {
+  opacity: 0.2;
+  filter: brightness(1.18) saturate(1.08);
+  box-shadow: 0 0 34px rgba(255, 253, 246, 0.09);
+}
+
+.jimmi-orb[data-state="thinking"] .jimmi-orb__fallback {
+  box-shadow:
+    inset 0 0 22px rgba(134, 168, 201, 0.07),
+    0 0 26px rgba(134, 168, 201, 0.07);
+}
+
+.jimmi-orb[data-state="speaking"] .jimmi-orb__fallback {
+  box-shadow:
+    inset 0 0 22px rgba(184, 106, 100, 0.07),
+    0 0 26px rgba(184, 106, 100, 0.08);
+}
+
+.jimmi-orb[data-state="error"] .jimmi-orb__fallback {
+  box-shadow:
+    inset 0 0 22px rgba(183, 154, 99, 0.08),
+    0 0 24px rgba(183, 154, 99, 0.06);
+}
+
+.jimmi-orb__status-ring {
+  position: absolute;
+  inset: 8%;
+  border-radius: inherit;
+  pointer-events: none;
+  background: transparent;
+  opacity: 0;
+  visibility: hidden;
+  filter: none;
+  mix-blend-mode: screen;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .jimmi-orb__status-ring {
+    animation: none;
+  }
+}
+
+@keyframes jimmi-orb-ring-drift {
+  to {
+    transform: rotate(360deg);
+  }
+}

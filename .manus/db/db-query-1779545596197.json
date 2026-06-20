@@ -1,0 +1,9 @@
+{
+  "query": "CREATE TABLE `stripeInvoices` (\n\t`id` int AUTO_INCREMENT NOT NULL,\n\t`userId` int NOT NULL,\n\t`stripeInvoiceId` varchar(255) NOT NULL,\n\t`stripeSubscriptionId` varchar(255),\n\t`amount` int NOT NULL,\n\t`currency` varchar(3) NOT NULL DEFAULT 'usd',\n\t`invoiceStatus` enum('draft','open','paid','void','uncollectible') NOT NULL,\n\t`paidAt` timestamp,\n\t`dueDate` timestamp,\n\t`periodStart` timestamp,\n\t`periodEnd` timestamp,\n\t`invoiceUrl` text,\n\t`createdAt` timestamp NOT NULL DEFAULT (now()),\n\t`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,\n\tCONSTRAINT `stripeInvoices_id` PRIMARY KEY(`id`),\n\tCONSTRAINT `stripeInvoices_stripeInvoiceId_unique` UNIQUE(`stripeInvoiceId`)\n);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway06.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 4MfKkRv4BtcjpAV.27131ce48b0a --database nkB3BF7vCNJASAUzbYZAhY --execute CREATE TABLE `stripeInvoices` (\n\t`id` int AUTO_INCREMENT NOT NULL,\n\t`userId` int NOT NULL,\n\t`stripeInvoiceId` varchar(255) NOT NULL,\n\t`stripeSubscriptionId` varchar(255),\n\t`amount` int NOT NULL,\n\t`currency` varchar(3) NOT NULL DEFAULT 'usd',\n\t`invoiceStatus` enum('draft','open','paid','void','uncollectible') NOT NULL,\n\t`paidAt` timestamp,\n\t`dueDate` timestamp,\n\t`periodStart` timestamp,\n\t`periodEnd` timestamp,\n\t`invoiceUrl` text,\n\t`createdAt` timestamp NOT NULL DEFAULT (now()),\n\t`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,\n\tCONSTRAINT `stripeInvoices_id` PRIMARY KEY(`id`),\n\tCONSTRAINT `stripeInvoices_stripeInvoiceId_unique` UNIQUE(`stripeInvoiceId`)\n);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 1015
+}

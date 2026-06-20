@@ -1,0 +1,1 @@
+ALTER TABLE `chatMessages` RENAME COLUMN `chatMessageRole` TO `role`;

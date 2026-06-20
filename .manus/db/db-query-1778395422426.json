@@ -1,0 +1,9 @@
+{
+  "query": "CREATE TABLE `accountSettings` (\n\t`id` int AUTO_INCREMENT NOT NULL,\n\t`userId` int NOT NULL,\n\t`planTier` enum('standard','premium') NOT NULL DEFAULT 'standard',\n\t`subscriptionStatus` enum('active','paused') NOT NULL DEFAULT 'active',\n\t`autoRenew` boolean NOT NULL DEFAULT true,\n\t`createdAt` timestamp NOT NULL DEFAULT (now()),\n\t`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,\n\tCONSTRAINT `accountSettings_id` PRIMARY KEY(`id`),\n\tCONSTRAINT `accountSettings_userId_unique` UNIQUE(`userId`)\n);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway06.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 4MfKkRv4BtcjpAV.27131ce48b0a --database nkB3BF7vCNJASAUzbYZAhY --execute CREATE TABLE `accountSettings` (\n\t`id` int AUTO_INCREMENT NOT NULL,\n\t`userId` int NOT NULL,\n\t`planTier` enum('standard','premium') NOT NULL DEFAULT 'standard',\n\t`subscriptionStatus` enum('active','paused') NOT NULL DEFAULT 'active',\n\t`autoRenew` boolean NOT NULL DEFAULT true,\n\t`createdAt` timestamp NOT NULL DEFAULT (now()),\n\t`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,\n\tCONSTRAINT `accountSettings_id` PRIMARY KEY(`id`),\n\tCONSTRAINT `accountSettings_userId_unique` UNIQUE(`userId`)\n);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 1086
+}

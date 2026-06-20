@@ -1,0 +1,80 @@
+{
+  "query": "SELECT id, userId, role, LEFT(content, 50) as content_preview, createdAt FROM chatMessages ORDER BY createdAt DESC LIMIT 10;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway06.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 4MfKkRv4BtcjpAV.27131ce48b0a --database nkB3BF7vCNJASAUzbYZAhY --execute SELECT id, userId, role, LEFT(content, 50) as content_preview, createdAt FROM chatMessages ORDER BY createdAt DESC LIMIT 10;",
+  "rows": [
+    {
+      "id": "510002",
+      "userId": "1",
+      "role": "assistant",
+      "content_preview": "Logged 1 cup of applesauce as a snack for you, Ant",
+      "createdAt": "2026-05-13 23:06:11"
+    },
+    {
+      "id": "510001",
+      "userId": "1",
+      "role": "user",
+      "content_preview": "Hey, Jimmy, can you log a cup of applesauce for me",
+      "createdAt": "2026-05-13 23:06:09"
+    },
+    {
+      "id": "480004",
+      "userId": "1",
+      "role": "assistant",
+      "content_preview": "Saved **McDonald's — Big Mac** to today’s Food Log",
+      "createdAt": "2026-05-13 22:55:42"
+    },
+    {
+      "id": "480003",
+      "userId": "1",
+      "role": "assistant",
+      "content_preview": "I identified **McDonald's — Big Mac** from your re",
+      "createdAt": "2026-05-13 22:54:54"
+    },
+    {
+      "id": "480002",
+      "userId": "1",
+      "role": "user",
+      "content_preview": "Hey, Jimmy, I had a Big Mac from McDonald's. Can y",
+      "createdAt": "2026-05-13 22:54:54"
+    },
+    {
+      "id": "480001",
+      "userId": "1",
+      "role": "assistant",
+      "content_preview": "I identified **Glaceau, Smartwater, Glaceuu Smart ",
+      "createdAt": "2026-05-13 22:52:57"
+    },
+    {
+      "id": "450001",
+      "userId": "1",
+      "role": "assistant",
+      "content_preview": "I identified **Eggs** from your photo. Here are th",
+      "createdAt": "2026-05-13 22:50:23"
+    },
+    {
+      "id": "420008",
+      "userId": "1",
+      "role": "assistant",
+      "content_preview": "I identified **Chipotle — Chicken Burrito** from y",
+      "createdAt": "2026-05-13 14:49:17"
+    },
+    {
+      "id": "420007",
+      "userId": "1",
+      "role": "user",
+      "content_preview": "I had a chicken burrito from chipotle. Can you log",
+      "createdAt": "2026-05-13 14:49:16"
+    },
+    {
+      "id": "420006",
+      "userId": "1",
+      "role": "assistant",
+      "content_preview": "You got it, Anthony. I’ll be here when you’re read",
+      "createdAt": "2026-05-13 14:46:11"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tuserId\trole\tcontent_preview\tcreatedAt\n510002\t1\tassistant\tLogged 1 cup of applesauce as a snack for you, Ant\t2026-05-13 23:06:11\n510001\t1\tuser\tHey, Jimmy, can you log a cup of applesauce for me\t2026-05-13 23:06:09\n480004\t1\tassistant\tSaved **McDonald's — Big Mac** to today’s Food Log\t2026-05-13 22:55:42\n480003\t1\tassistant\tI identified **McDonald's — Big Mac** from your re\t2026-05-13 22:54:54\n480002\t1\tuser\tHey, Jimmy, I had a Big Mac from McDonald's. Can y\t2026-05-13 22:54:54\n480001\t1\tassistant\tI identified **Glaceau, Smartwater, Glaceuu Smart \t2026-05-13 22:52:57\n450001\t1\tassistant\tI identified **Eggs** from your photo. Here are th\t2026-05-13 22:50:23\n420008\t1\tassistant\tI identified **Chipotle — Chicken Burrito** from y\t2026-05-13 14:49:17\n420007\t1\tuser\tI had a chicken burrito from chipotle. Can you log\t2026-05-13 14:49:16\n420006\t1\tassistant\tYou got it, Anthony. I’ll be here when you’re read\t2026-05-13 14:46:11\n",
+  "stderr": "",
+  "execution_time_ms": 258
+}

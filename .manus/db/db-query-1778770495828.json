@@ -1,0 +1,64 @@
+{
+  "query": "SHOW TABLES; SELECT id, role, createdAt FROM users ORDER BY createdAt DESC LIMIT 10;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway06.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 4MfKkRv4BtcjpAV.27131ce48b0a --database nkB3BF7vCNJASAUzbYZAhY --execute SHOW TABLES; SELECT id, role, createdAt FROM users ORDER BY createdAt DESC LIMIT 10;",
+  "rows": [
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "__drizzle_migrations"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "accountSettings"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "calorieOutSummaries"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "chatMessages"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "exerciseLogEntries"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "foodLogEntries"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "jimmiProfiles"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "jimmiPrograms"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "mealLogs"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "programGenerationEvents"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "subscriptions"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "users"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "wearableConnections"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "workoutExercises"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "workoutLogs"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "id\trole\tcreatedAt"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "12990001\tuser\t2026-05-14 14:34:25"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "1\tadmin\t2026-05-08 04:59:52"
+    }
+  ],
+  "messages": [],
+  "stdout": "Tables_in_nkB3BF7vCNJASAUzbYZAhY\n__drizzle_migrations\naccountSettings\ncalorieOutSummaries\nchatMessages\nexerciseLogEntries\nfoodLogEntries\njimmiProfiles\njimmiPrograms\nmealLogs\nprogramGenerationEvents\nsubscriptions\nusers\nwearableConnections\nworkoutExercises\nworkoutLogs\nid\trole\tcreatedAt\n12990001\tuser\t2026-05-14 14:34:25\n1\tadmin\t2026-05-08 04:59:52\n",
+  "stderr": "",
+  "execution_time_ms": 395
+}

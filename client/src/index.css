@@ -1,0 +1,190 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@plugin "tailwindcss-animate";
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --font-sans: "Barlow", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Barlow Condensed", "Barlow", ui-sans-serif, system-ui, sans-serif;
+  --font-brand: "Rajdhani", "Barlow Condensed", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+:root,
+.dark {
+  color-scheme: dark;
+  --radius: 1rem;
+  --background: #000000;
+  --foreground: #f8f8f8;
+  --card: #090909;
+  --card-foreground: #f8f8f8;
+  --popover: #0d0d0d;
+  --popover-foreground: #f8f8f8;
+  --primary: #ffffff;
+  --primary-foreground: #050505;
+  --secondary: #111111;
+  --secondary-foreground: #f8f8f8;
+  --muted: #111111;
+  --muted-foreground: #a6a6a6;
+  --accent: #d7d7d7;
+  --accent-foreground: #050505;
+  --destructive: #ef4444;
+  --destructive-foreground: #fafafa;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.12);
+  --ring: rgba(255, 255, 255, 0.72);
+}
+
+@keyframes jimmi-confetti-pop-burst {
+  0% {
+    opacity: 0;
+    transform: translate3d(-50%, -50%, 0) rotate(0deg) scale(0.35);
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  55% {
+    opacity: 1;
+    transform: translate3d(calc(-50% + var(--confetti-x)), calc(-50% + var(--confetti-y)), 0) rotate(var(--confetti-rotate)) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(calc(-50% + var(--confetti-x)), calc(-50% + var(--confetti-y) + 42px), 0) rotate(calc(var(--confetti-rotate) + 180deg)) scale(0.72);
+  }
+}
+
+@keyframes jimmi-confetti-badge-pop {
+  0% {
+    opacity: 0;
+    transform: translate3d(-50%, -50%, 0) scale(0.82);
+  }
+
+  38% {
+    opacity: 1;
+    transform: translate3d(-50%, -50%, 0) scale(1.04);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(-50%, -50%, 0) scale(1);
+  }
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    @apply border-border outline-ring/50;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background: #000000;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+    overscroll-behavior: none;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: clip;
+    overscroll-behavior: none;
+    font-family: "Barlow", ui-sans-serif, system-ui, sans-serif;
+    font-feature-settings: "liga" 1, "kern" 1;
+    font-weight: 400;
+    letter-spacing: 0.005em;
+  }
+
+  #root {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    min-height: 100vh;
+    overflow-x: clip;
+    overscroll-behavior-x: none;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-weight: 300;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  @media (max-width: 640px) {
+    input,
+    textarea,
+    select {
+      font-size: 16px;
+    }
+  }
+
+  ::selection {
+    background: rgba(255, 255, 255, 0.22);
+    color: #f8f8f8;
+  }
+
+  .container {
+    width: min(100% - 2rem, 1180px);
+    margin-inline: auto;
+  }
+
+  .font-display {
+    font-family: "Barlow Condensed", "Barlow", ui-sans-serif, system-ui, sans-serif;
+  }
+
+  .jimmi-wordmark {
+    display: inline-flex;
+    align-items: center;
+    min-width: 0;
+    line-height: 1;
+  }
+
+  .jimmi-wordmark img {
+    display: block;
+    max-width: min(8.5rem, 42vw);
+    object-fit: contain;
+  }
+}

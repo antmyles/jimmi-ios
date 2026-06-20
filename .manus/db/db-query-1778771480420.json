@@ -1,0 +1,55 @@
+{
+  "query": "SHOW TABLES;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway06.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 4MfKkRv4BtcjpAV.27131ce48b0a --database nkB3BF7vCNJASAUzbYZAhY --execute SHOW TABLES;",
+  "rows": [
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "__drizzle_migrations"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "accountSettings"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "calorieOutSummaries"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "chatMessages"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "exerciseLogEntries"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "foodLogEntries"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "jimmiProfiles"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "jimmiPrograms"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "mealLogs"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "programGenerationEvents"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "subscriptions"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "users"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "wearableConnections"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "workoutExercises"
+    },
+    {
+      "Tables_in_nkB3BF7vCNJASAUzbYZAhY": "workoutLogs"
+    }
+  ],
+  "messages": [],
+  "stdout": "Tables_in_nkB3BF7vCNJASAUzbYZAhY\n__drizzle_migrations\naccountSettings\ncalorieOutSummaries\nchatMessages\nexerciseLogEntries\nfoodLogEntries\njimmiProfiles\njimmiPrograms\nmealLogs\nprogramGenerationEvents\nsubscriptions\nusers\nwearableConnections\nworkoutExercises\nworkoutLogs\n",
+  "stderr": "",
+  "execution_time_ms": 261
+}

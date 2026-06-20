@@ -1,0 +1,28 @@
+{
+  "query": "SELECT u.id, u.openId, u.name, u.role, u.createdAt, COUNT(c.id) as chatCount, jp.id as profileId FROM users u LEFT JOIN chatMessages c ON c.userId = u.id LEFT JOIN jimmiProfiles jp ON jp.userId = u.id GROUP BY u.id ORDER BY u.createdAt ASC;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway06.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 4MfKkRv4BtcjpAV.27131ce48b0a --database nkB3BF7vCNJASAUzbYZAhY --execute SELECT u.id, u.openId, u.name, u.role, u.createdAt, COUNT(c.id) as chatCount, jp.id as profileId FROM users u LEFT JOIN chatMessages c ON c.userId = u.id LEFT JOIN jimmiProfiles jp ON jp.userId = u.id GROUP BY u.id ORDER BY u.createdAt ASC;",
+  "rows": [
+    {
+      "id": "1",
+      "openId": "4pBWiv5M5zpBLswXnuPEKP",
+      "name": "Anthony Myles",
+      "role": "admin",
+      "createdAt": "2026-05-08 04:59:52",
+      "chatCount": "83",
+      "profileId": "420001"
+    },
+    {
+      "id": "12990001",
+      "openId": "Gjucx4FaLPfqZwdhJC5ewQ",
+      "name": "Genesis Ismandra",
+      "role": "user",
+      "createdAt": "2026-05-14 14:34:25",
+      "chatCount": "0",
+      "profileId": "NULL"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\topenId\tname\trole\tcreatedAt\tchatCount\tprofileId\n1\t4pBWiv5M5zpBLswXnuPEKP\tAnthony Myles\tadmin\t2026-05-08 04:59:52\t83\t420001\n12990001\tGjucx4FaLPfqZwdhJC5ewQ\tGenesis Ismandra\tuser\t2026-05-14 14:34:25\t0\tNULL\n",
+  "stderr": "",
+  "execution_time_ms": 930
+}

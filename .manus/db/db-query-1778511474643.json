@@ -1,0 +1,13 @@
+{
+  "query": "SET @has_old_chat_role := (SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'chatMessages' AND COLUMN_NAME = 'chatMessageRole');\nSET @has_new_chat_role := (SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'chatMessages' AND COLUMN_NAME = 'role');\nSET @chat_role_sql := IF(@has_old_chat_role = 1 AND @has_new_chat_role = 0, 'ALTER TABLE `chatMessages` RENAME COLUMN `chatMessageRole` TO `role`', 'SELECT ''chatMessages role column already aligned'' AS status');\nPREPARE chat_role_stmt FROM @chat_role_sql;\nEXECUTE chat_role_stmt;\nDEALLOCATE PREPARE chat_role_stmt;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway06.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 4MfKkRv4BtcjpAV.27131ce48b0a --database nkB3BF7vCNJASAUzbYZAhY --execute SET @has_old_chat_role := (SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'chatMessages' AND COLUMN_NAME = 'chatMessageRole');\nSET @has_new_chat_role := (SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'chatMessages' AND COLUMN_NAME = 'role');\nSET @chat_role_sql := IF(@has_old_chat_role = 1 AND @has_new_chat_role = 0, 'ALTER TABLE `chatMessages` RENAME COLUMN `chatMessageRole` TO `role`', 'SELECT ''chatMessages role column already aligned'' AS status');\nPREPARE chat_role_stmt FROM @chat_role_sql;\nEXECUTE chat_role_stmt;\nDEALLOCATE PREPARE chat_role_stmt;",
+  "rows": [
+    {
+      "status": "chatMessages role column already aligned"
+    }
+  ],
+  "messages": [],
+  "stdout": "status\nchatMessages role column already aligned\n",
+  "stderr": "",
+  "execution_time_ms": 1169
+}

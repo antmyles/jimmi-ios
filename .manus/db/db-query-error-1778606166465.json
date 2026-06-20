@@ -1,0 +1,8 @@
+{
+  "query": "ALTER TABLE `accountSettings` MODIFY COLUMN `planTier` enum('free','core','pro','elite') NOT NULL DEFAULT 'free';\nALTER TABLE `users` ADD `tier` enum('free','core','pro','elite') DEFAULT 'free' NOT NULL;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway06.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 4MfKkRv4BtcjpAV.27131ce48b0a --database nkB3BF7vCNJASAUzbYZAhY --execute ALTER TABLE `accountSettings` MODIFY COLUMN `planTier` enum('free','core','pro','elite') NOT NULL DEFAULT 'free';\nALTER TABLE `users` ADD `tier` enum('free','core','pro','elite') DEFAULT 'free' NOT NULL;",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1265 (01000) at line 1: Data truncated for column 'planTier', value is 'standard'"
+  ]
+}

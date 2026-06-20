@@ -1,0 +1,3 @@
+# Mobile Chat Edge Clipping Findings
+
+The uploaded screen recording shows the JIMMI chat page clipped on both left and right edges. The header logo is partially cut on the left, the profile avatar is clipped on the right, message card borders are missing at both sides, and the composer is cut at both ends. The issue appears to be page-level or outer-shell width overflow rather than a single inner message element. The viewport meta tag is present in `client/index.html`, so the likely cause is a combination of `100vw` width, fixed/full-width outer containers, padding or margins, and `overflow-x-hidden` masking content that is still wider than the mobile viewport.

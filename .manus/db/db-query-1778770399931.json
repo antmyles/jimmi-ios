@@ -1,0 +1,59 @@
+{
+  "query": "DESCRIBE chatMessages; SELECT COUNT(*) as total_messages FROM chatMessages; SELECT * FROM chatMessages ORDER BY createdAt DESC LIMIT 5;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway06.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 4MfKkRv4BtcjpAV.27131ce48b0a --database nkB3BF7vCNJASAUzbYZAhY --execute DESCRIBE chatMessages; SELECT COUNT(*) as total_messages FROM chatMessages; SELECT * FROM chatMessages ORDER BY createdAt DESC LIMIT 5;",
+  "rows": [
+    {
+      "Field": "id",
+      "Type": "int",
+      "Null": "NO",
+      "Key": "PRI",
+      "Default": "NULL",
+      "Extra": "auto_increment"
+    },
+    {
+      "Field": "userId",
+      "Type": "int",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "role",
+      "Type": "enum('user','assistant')",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "content",
+      "Type": "text",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "createdAt",
+      "Type": "timestamp",
+      "Null": "NO",
+      "Key": "",
+      "Default": "CURRENT_TIMESTAMP",
+      "Extra": ""
+    }
+  ],
+  "messages": [
+    "total_messages",
+    "83",
+    "id\tuserId\trole\tcontent\tcreatedAt",
+    "510002\t1\tassistant\tLogged 1 cup of applesauce as a snack for you, Anthony.\t2026-05-13 23:06:11",
+    "510001\t1\tuser\tHey, Jimmy, can you log a cup of applesauce for me?\t2026-05-13 23:06:09",
+    "480004\t1\tassistant\tSaved **McDonald's — Big Mac** to today’s Food Log.\t2026-05-13 22:55:42",
+    "480003\t1\tassistant\tI identified **McDonald's — Big Mac** from your restaurant description. Here are the estimated macros and guidance. You can keep chatting with me below, or save it to your Food Log if it looks right. You will be able to review and edit the numbers before the log is saved.\t2026-05-13 22:54:54",
+    "480002\t1\tuser\tHey, Jimmy, I had a Big Mac from McDonald's. Can you log...\t2026-05-13 22:54:54"
+  ],
+  "stdout": "Field\tType\tNull\tKey\tDefault\tExtra\nid\tint\tNO\tPRI\tNULL\tauto_increment\nuserId\tint\tNO\t\tNULL\t\nrole\tenum('user','assistant')\tNO\t\tNULL\t\ncontent\ttext\tNO\t\tNULL\t\ncreatedAt\ttimestamp\tNO\t\tCURRENT_TIMESTAMP\t\ntotal_messages\n83\nid\tuserId\trole\tcontent\tcreatedAt\n510002\t1\tassistant\tLogged 1 cup of applesauce as a snack for you, Anthony.\t2026-05-13 23:06:11\n510001\t1\tuser\tHey, Jimmy, can you log a cup of applesauce for me?\t2026-05-13 23:06:09\n480004\t1\tassistant\tSaved **McDonald's — Big Mac** to today’s Food Log.\t2026-05-13 22:55:42\n480003\t1\tassistant\tI identified **McDonald's — Big Mac** from your restaurant description. Here are the estimated macros and guidance. You can keep chatting with me below, or save it to your Food Log if it looks right. You will be able to review and edit the numbers before the log is saved.\t2026-05-13 22:54:54\n480002\t1\tuser\tHey, Jimmy, I had a Big Mac from McDonald's. Can you log...\t2026-05-13 22:54:54\n",
+  "stderr": "",
+  "execution_time_ms": 1092
+}

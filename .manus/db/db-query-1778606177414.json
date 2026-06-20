@@ -1,0 +1,9 @@
+{
+  "query": "ALTER TABLE `accountSettings` MODIFY COLUMN `planTier` enum('free','core','pro','elite','standard','premium') NOT NULL DEFAULT 'free';\nUPDATE `accountSettings` SET `planTier` = 'free' WHERE `planTier` = 'standard';\nUPDATE `accountSettings` SET `planTier` = 'core' WHERE `planTier` = 'premium';\nALTER TABLE `accountSettings` MODIFY COLUMN `planTier` enum('free','core','pro','elite') NOT NULL DEFAULT 'free';\nALTER TABLE `users` ADD COLUMN IF NOT EXISTS `tier` enum('free','core','pro','elite') DEFAULT 'free' NOT NULL;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway06.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 4MfKkRv4BtcjpAV.27131ce48b0a --database nkB3BF7vCNJASAUzbYZAhY --execute ALTER TABLE `accountSettings` MODIFY COLUMN `planTier` enum('free','core','pro','elite','standard','premium') NOT NULL DEFAULT 'free';\nUPDATE `accountSettings` SET `planTier` = 'free' WHERE `planTier` = 'standard';\nUPDATE `accountSettings` SET `planTier` = 'core' WHERE `planTier` = 'premium';\nALTER TABLE `accountSettings` MODIFY COLUMN `planTier` enum('free','core','pro','elite') NOT NULL DEFAULT 'free';\nALTER TABLE `users` ADD COLUMN IF NOT EXISTS `tier` enum('free','core','pro','elite') DEFAULT 'free' NOT NULL;",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 1025
+}

@@ -1,0 +1,13 @@
+{
+  "query": "SELECT COUNT(*) as profile_count FROM jimmiProfiles WHERE userId = 12990001;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway06.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 4MfKkRv4BtcjpAV.27131ce48b0a --database nkB3BF7vCNJASAUzbYZAhY --execute SELECT COUNT(*) as profile_count FROM jimmiProfiles WHERE userId = 12990001;",
+  "rows": [
+    {
+      "profile_count": "0"
+    }
+  ],
+  "messages": [],
+  "stdout": "profile_count\n0\n",
+  "stderr": "",
+  "execution_time_ms": 275
+}

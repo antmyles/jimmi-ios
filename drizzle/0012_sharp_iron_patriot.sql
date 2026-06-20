@@ -1,0 +1,2 @@
+ALTER TABLE `accountSettings` MODIFY COLUMN `planTier` enum('free','core','pro','elite') NOT NULL DEFAULT 'free';--> statement-breakpoint
+ALTER TABLE `users` ADD `tier` enum('free','core','pro','elite') DEFAULT 'free' NOT NULL;

@@ -1,0 +1,17 @@
+{
+  "query": "SELECT u.id, u.name, COUNT(cm.id) as message_count, MAX(cm.createdAt) as latest_message, MIN(cm.createdAt) as oldest_message FROM users u LEFT JOIN chatMessages cm ON cm.userId = u.id GROUP BY u.id, u.name ORDER BY u.id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway06.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 4MfKkRv4BtcjpAV.27131ce48b0a --database nkB3BF7vCNJASAUzbYZAhY --execute SELECT u.id, u.name, COUNT(cm.id) as message_count, MAX(cm.createdAt) as latest_message, MIN(cm.createdAt) as oldest_message FROM users u LEFT JOIN chatMessages cm ON cm.userId = u.id GROUP BY u.id, u.name ORDER BY u.id;",
+  "rows": [
+    {
+      "id": "1",
+      "name": "Anthony Myles",
+      "message_count": "81",
+      "latest_message": "2026-05-13 22:55:42",
+      "oldest_message": "2026-05-11 15:06:01"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tmessage_count\tlatest_message\toldest_message\n1\tAnthony Myles\t81\t2026-05-13 22:55:42\t2026-05-11 15:06:01\n",
+  "stderr": "",
+  "execution_time_ms": 282
+}

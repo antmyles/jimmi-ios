@@ -1,0 +1,5 @@
+# Reopened Onboarding Authentication Loop Findings
+
+The supplied screen recording shows the user completing onboarding while unauthenticated on `/onboarding`, tapping **Start Coaching**, seeing the OAuth account chooser page titled **Continue to JIMMI Fit Recovery**, selecting the account, and returning to `/onboarding` at **Step 1 of 7** instead of landing in JIMMI Chat. This means the first redirect to OAuth is expected for preview-mode onboarding, but the post-OAuth resume path is not reliably restoring the pending onboarding draft and submit intent.
+
+The observed failure is more specific than a Chat auth guard issue: after sign-in, the app does not resume the completed review step or auto-complete onboarding. A robust fix should not rely only on browser localStorage surviving the OAuth/account-chooser round trip. The pending onboarding payload and submit intent should also be carried in the OAuth return path so `/onboarding` can restore and complete the exact draft after authentication.

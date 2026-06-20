@@ -1,0 +1,132 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1778215287151,
+      "tag": "0000_naive_jubilee",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1778218277786,
+      "tag": "0001_rich_plazm",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1778274730461,
+      "tag": "0002_dapper_pandemic",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1778356339635,
+      "tag": "0003_chunky_corsair",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1778383187264,
+      "tag": "0004_previous_wild_child",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1778395412822,
+      "tag": "0005_quick_blade",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1778463510740,
+      "tag": "0006_slim_sheva_callister",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1778467253989,
+      "tag": "0007_famous_iron_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "5",
+      "when": 1778492843001,
+      "tag": "0008_bright_tomas",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "5",
+      "when": 1778509500775,
+      "tag": "0009_burly_norman_osborn",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "5",
+      "when": 1778511438349,
+      "tag": "0010_careless_madame_masque",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "5",
+      "when": 1778538816863,
+      "tag": "0011_romantic_leper_queen",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "5",
+      "when": 1778606152751,
+      "tag": "0012_sharp_iron_patriot",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "5",
+      "when": 1778611480655,
+      "tag": "0013_pale_blazing_skull",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "5",
+      "when": 1778782315877,
+      "tag": "0014_motionless_serpent_society",
+      "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "5",
+      "when": 1779503963824,
+      "tag": "0015_sturdy_nehzno",
+      "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "5",
+      "when": 1779545588946,
+      "tag": "0016_complete_betty_brant",
+      "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "5",
+      "when": 1779556740263,
+      "tag": "0017_windy_rhodey",
+      "breakpoints": true
+    }
+  ]
+}

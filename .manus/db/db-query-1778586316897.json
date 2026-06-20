@@ -1,0 +1,19 @@
+{
+  "query": "SELECT id, openId, name, email, role, createdAt, lastSignedIn FROM users ORDER BY lastSignedIn DESC LIMIT 20;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway06.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 4MfKkRv4BtcjpAV.27131ce48b0a --database nkB3BF7vCNJASAUzbYZAhY --execute SELECT id, openId, name, email, role, createdAt, lastSignedIn FROM users ORDER BY lastSignedIn DESC LIMIT 20;",
+  "rows": [
+    {
+      "id": "1",
+      "openId": "4pBWiv5M5zpBLswXnuPEKP",
+      "name": "NULL",
+      "email": "NULL",
+      "role": "user",
+      "createdAt": "2026-05-08 04:59:52",
+      "lastSignedIn": "2026-05-12 11:43:39"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\topenId\tname\temail\trole\tcreatedAt\tlastSignedIn\n1\t4pBWiv5M5zpBLswXnuPEKP\tNULL\tNULL\tuser\t2026-05-08 04:59:52\t2026-05-12 11:43:39\n",
+  "stderr": "",
+  "execution_time_ms": 319
+}

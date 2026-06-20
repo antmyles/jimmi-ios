@@ -1,0 +1,11 @@
+# Restaurant Nutrition Feature Design
+
+JIMMI should treat restaurant meals as a structured estimate workflow rather than a direct write to the Food Log. The backend contract will accept a natural-language meal description and optional restaurant/menu fields. The response will either return a macro estimate candidate or a list of clarifying questions. Candidate estimates will include restaurant name, menu item, normalized portion fraction, base serving details, adjusted calories, protein, carbs, fat, confidence, data source label, source note, suggested meal type, and concise guidance.
+
+The first implementation will not claim universal restaurant coverage. It will include a deterministic internal mini-catalog for common development/test flows, including Chipotle chicken burrito-style examples, and a production-ready lookup path that can be expanded to Nutritionix/FatSecret credentials later. If an exact catalog or API match is unavailable, JIMMI will invoke the existing server-side LLM helper to provide a clearly labeled estimate and ask clarifying questions when the restaurant, item, portion, or ingredients are ambiguous.
+
+Portion handling will parse common language such as "half," "1/2," "quarter," "two thirds," "one and a half," and explicit percent language. The final estimate will multiply the base serving macros by the parsed fraction and round to integers. If no portion is supplied, JIMMI assumes one standard menu serving and sets confidence accordingly.
+
+The frontend will reuse the existing scan-result card path but extend it to support `source: "restaurant"`. When JIMMI returns a candidate restaurant estimate, the chat thread displays an editable macro confirmation card before saving. The card lets users edit food name, calories, protein, carbs, fat, meal type, and notes before the existing `foodLog.add` mutation is called. If clarification is needed, the thread displays JIMMI’s questions and does not show a save button until enough information is available.
+
+Tests should cover exact Chipotle half-burrito portion math, clarification behavior for vague restaurant meal prompts, router persistence via the existing food log contract, and UI-safe response shape expectations.

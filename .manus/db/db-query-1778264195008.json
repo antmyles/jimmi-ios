@@ -1,0 +1,9 @@
+{
+  "query": "ALTER TABLE `jimmiProfiles` MODIFY COLUMN `dietRestrictions` text NOT NULL;\nALTER TABLE `jimmiProfiles` MODIFY COLUMN `foodAllergies` text NOT NULL;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway06.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 4MfKkRv4BtcjpAV.27131ce48b0a --database nkB3BF7vCNJASAUzbYZAhY --execute ALTER TABLE `jimmiProfiles` MODIFY COLUMN `dietRestrictions` text NOT NULL;\nALTER TABLE `jimmiProfiles` MODIFY COLUMN `foodAllergies` text NOT NULL;",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 2156
+}
