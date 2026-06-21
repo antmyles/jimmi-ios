@@ -15,7 +15,8 @@
         "NSHealthUpdateUsageDescription": "JIMMI needs permission to save your workouts to Apple Health.",
         "NSCameraUsageDescription": "JIMMI uses your camera for profile photos.",
         "NSPhotoLibraryUsageDescription": "JIMMI needs access to your photos.",
-        "NSHealthClinicalHealthRecordsShareUsageDescription": "JIMMI needs access to your health records."
+        "NSHealthClinicalHealthRecordsShareUsageDescription": "JIMMI needs access to your health records.",
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
@@ -53,6 +54,12 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "563f9bf2-b3bc-46c2-8d25-8bfa2cf9163f"
+      }
     }
   }
 }
