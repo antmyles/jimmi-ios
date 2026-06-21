@@ -17,7 +17,8 @@
         "NSPhotoLibraryUsageDescription": "JIMMI needs access to your photos.",
         "NSHealthClinicalHealthRecordsShareUsageDescription": "JIMMI needs access to your health records.",
         "ITSAppUsesNonExemptEncryption": false
-      }
+      },
+      "buildNumber": "2"
     },
     "android": {
       "adaptiveIcon": {
