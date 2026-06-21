@@ -18,7 +18,7 @@
         "NSHealthClinicalHealthRecordsShareUsageDescription": "JIMMI needs access to your health records.",
         "ITSAppUsesNonExemptEncryption": false
       },
-      "buildNumber": "2"
+      "buildNumber": "5"
     },
     "android": {
       "adaptiveIcon": {
