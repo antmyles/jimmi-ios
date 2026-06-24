@@ -9,7 +9,7 @@
     "ios": {
       "supportsTabletMode": true,
       "bundleIdentifier": "com.jimmi.ios",
-      "buildNumber": "28",
+      "buildNumber": "29",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
