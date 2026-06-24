@@ -9,11 +9,11 @@
     "ios": {
       "supportsTabletMode": true,
       "bundleIdentifier": "com.jimmi.ios",
+      "buildNumber": "27",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
     },
-    "buildNumber": "26",
     "extra": {
       "eas": {
         "projectId": "25cdf28c-c0b4-4784-82a7-d5fafda8be9c"
