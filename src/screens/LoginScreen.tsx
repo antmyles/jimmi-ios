@@ -1,74 +1,82 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, ActivityIndicator, StyleSheet, Alert } from 'react-native';
-import { GoogleSignin, GoogleSigninButton } from '@react-native-google-signin/google-signin';
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ActivityIndicator,
+  StyleSheet,
+  Alert,
+  TextInput,
+  ScrollView,
+} from 'react-native';
 import { useAuthStore } from '../hooks/useAuthStore';
 import { authService } from '../services/authService';
 
 export function LoginScreen() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
   const setUser = useAuthStore((state) => state.setUser);
   const setToken = useAuthStore((state) => state.setToken);
 
-  useEffect(() => {
-    // Configure Google Sign-In
-    GoogleSignin.configure({
-      webClientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID,
-      offlineAccess: true,
-      scopes: ['profile', 'email'],
-    });
-  }, []);
+  const handleLogin = async () => {
+    if (!email || !password) {
+      setError('Please fill in all fields');
+      return;
+    }
 
-  const handleGoogleSignIn = async () => {
     setIsLoading(true);
     setError(null);
     try {
-      // Check if device has Google Play Services
-      await GoogleSignin.hasPlayServices();
-      
-      // Sign in with Google
-      const userInfo = await GoogleSignin.signIn();
-      
-      if (!userInfo.data?.idToken) {
-        throw new Error('No ID token received from Google');
-      }
-
-      // Send ID token to backend
-      const { user, token } = await authService.signInWithGoogle(userInfo.data.idToken);
-      
+      const { user, token } = await authService.signInWithEmail(email, password);
       setUser(user);
       setToken(token);
-      
-      // Success - user will be redirected to HomeScreen automatically
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Sign-in failed';
+      const errorMessage = err instanceof Error ? err.message : 'Login failed';
       setError(errorMessage);
-      Alert.alert('Sign-In Error', errorMessage);
-      console.error('Google Sign-In error:', err);
+      Alert.alert('Login Error', errorMessage);
+      console.error('Login error:', err);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleAppleSignIn = async () => {
+  const handleSignUp = async () => {
+    if (!email || !password || !name) {
+      setError('Please fill in all fields');
+      return;
+    }
+
+    if (password.length < 6) {
+      setError('Password must be at least 6 characters');
+      return;
+    }
+
     setIsLoading(true);
     setError(null);
     try {
-      // TODO: Implement Apple Sign-In with react-native-apple-authentication
-      Alert.alert('Coming Soon', 'Apple Sign-In will be available soon');
+      const { user, token } = await authService.signUp(email, password, name);
+      setUser(user);
+      setToken(token);
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Sign-in failed';
+      const errorMessage = err instanceof Error ? err.message : 'Sign-up failed';
       setError(errorMessage);
-      Alert.alert('Sign-In Error', errorMessage);
+      Alert.alert('Sign-Up Error', errorMessage);
+      console.error('Sign-up error:', err);
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>JIMMI</Text>
-      <Text style={styles.subtitle}>AI Fitness Coach</Text>
+    <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+      <View style={styles.headerContainer}>
+        <Text style={styles.title}>JIMMI</Text>
+        <Text style={styles.subtitle}>AI Fitness Coach</Text>
+      </View>
 
       {error && (
         <View style={styles.errorContainer}>
@@ -76,28 +84,76 @@ export function LoginScreen() {
         </View>
       )}
 
-      <View style={styles.buttonContainer}>
+      <View style={styles.formContainer}>
+        <Text style={styles.formTitle}>
+          {isSignUp ? 'Create Account' : 'Welcome Back'}
+        </Text>
+
+        {isSignUp && (
+          <TextInput
+            style={styles.input}
+            placeholder="Full Name"
+            placeholderTextColor="#666"
+            value={name}
+            onChangeText={setName}
+            editable={!isLoading}
+          />
+        )}
+
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          placeholderTextColor="#666"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          autoCapitalize="none"
+          editable={!isLoading}
+        />
+
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          placeholderTextColor="#666"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+          editable={!isLoading}
+        />
+
         {isLoading ? (
           <View style={styles.loadingContainer}>
             <ActivityIndicator size="large" color="#4CAF50" />
-            <Text style={styles.loadingText}>Signing in...</Text>
+            <Text style={styles.loadingText}>
+              {isSignUp ? 'Creating account...' : 'Signing in...'}
+            </Text>
           </View>
         ) : (
           <>
-            <GoogleSigninButton
-              size={GoogleSigninButton.Size.Wide}
-              color={GoogleSigninButton.Color.Dark}
-              onPress={handleGoogleSignIn}
-              disabled={isLoading}
-              style={styles.googleButton}
-            />
-
             <TouchableOpacity
-              style={[styles.button, styles.appleButton]}
-              onPress={handleAppleSignIn}
+              style={styles.primaryButton}
+              onPress={isSignUp ? handleSignUp : handleLogin}
               disabled={isLoading}
             >
-              <Text style={styles.buttonText}>Sign in with Apple</Text>
+              <Text style={styles.primaryButtonText}>
+                {isSignUp ? 'Create Account' : 'Sign In'}
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => {
+                setIsSignUp(!isSignUp);
+                setError(null);
+                setEmail('');
+                setPassword('');
+                setName('');
+              }}
+            >
+              <Text style={styles.toggleText}>
+                {isSignUp
+                  ? 'Already have an account? Sign In'
+                  : "Don't have an account? Sign Up"}
+              </Text>
             </TouchableOpacity>
           </>
         )}
@@ -106,17 +162,23 @@ export function LoginScreen() {
       <Text style={styles.disclaimer}>
         By signing in, you agree to our Terms of Service and Privacy Policy
       </Text>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#0A0A0A',
+  },
+  contentContainer: {
+    flexGrow: 1,
     padding: 20,
+    justifyContent: 'center',
+  },
+  headerContainer: {
+    alignItems: 'center',
+    marginBottom: 40,
   },
   title: {
     fontSize: 32,
@@ -127,7 +189,6 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 16,
     color: '#888',
-    marginBottom: 40,
   },
   errorContainer: {
     backgroundColor: '#ff6b6b20',
@@ -142,31 +203,45 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: 'center',
   },
-  buttonContainer: {
-    width: '100%',
-    marginBottom: 24,
+  formContainer: {
+    marginBottom: 40,
   },
-  googleButton: {
-    width: '100%',
-    height: 48,
-    marginBottom: 12,
+  formTitle: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#fff',
+    marginBottom: 20,
+    textAlign: 'center',
   },
-  button: {
-    width: '100%',
-    paddingVertical: 16,
-    borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  appleButton: {
-    backgroundColor: '#000',
+  input: {
+    backgroundColor: '#1a1a1a',
     borderWidth: 1,
-    borderColor: '#fff',
-  },
-  buttonText: {
+    borderColor: '#333',
+    borderRadius: 8,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    marginBottom: 12,
     color: '#fff',
     fontSize: 16,
+  },
+  primaryButton: {
+    backgroundColor: '#4CAF50',
+    paddingVertical: 14,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  primaryButtonText: {
+    color: '#fff',
     fontWeight: '600',
+    fontSize: 16,
+  },
+  toggleText: {
+    color: '#4CAF50',
+    fontSize: 14,
+    textAlign: 'center',
+    marginTop: 16,
+    fontWeight: '500',
   },
   loadingContainer: {
     justifyContent: 'center',

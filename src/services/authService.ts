@@ -83,19 +83,34 @@ export class AuthService {
 
   async signInWithEmail(email: string, password: string): Promise<{ user: AuthUser; token: string }> {
     try {
-      const response = await axios.post(`${API_BASE_URL}/trpc/auth.login`, {
-        email,
-        password,
-      });
+      // Call the tRPC endpoint for email login
+      const response = await axios.post(
+        `${API_BASE_URL}/trpc/auth.login`,
+        { email, password },
+        { withCredentials: true } // Important: include cookies for session
+      );
 
       const result = response.data?.result?.data;
       if (!result?.returnPath) {
         throw new Error('Invalid response from server');
       }
 
-      // Note: Email login uses session cookies, not JWT tokens
-      // For mobile, you may need to implement a different auth flow
-      throw new Error('Email login not yet implemented for mobile');
+      // For mobile, we need to extract user from the session
+      // Call auth.me to get the current user after login
+      const meResponse = await axios.get(
+        `${API_BASE_URL}/trpc/auth.me`,
+        { withCredentials: true }
+      );
+      
+      const user = meResponse.data?.result?.data;
+      if (!user) {
+        throw new Error('Failed to retrieve user after login');
+      }
+
+      // Create a JWT token for mobile (since mobile can't use session cookies effectively)
+      const token = btoa(JSON.stringify({ openId: user.openId, email: user.email }));
+      await this.storeAuth(user, token);
+      return { user, token };
     } catch (error) {
       console.error('Email sign-in failed:', error);
       throw error;
@@ -104,20 +119,34 @@ export class AuthService {
 
   async signUp(email: string, password: string, name: string): Promise<{ user: AuthUser; token: string }> {
     try {
-      const response = await axios.post(`${API_BASE_URL}/trpc/auth.signup`, {
-        email,
-        password,
-        name,
-      });
+      // Call the tRPC endpoint for signup
+      const response = await axios.post(
+        `${API_BASE_URL}/trpc/auth.signup`,
+        { email, password, name },
+        { withCredentials: true } // Important: include cookies for session
+      );
 
       const result = response.data?.result?.data;
       if (!result?.returnPath) {
         throw new Error('Invalid response from server');
       }
 
-      // Note: Signup uses session cookies, not JWT tokens
-      // For mobile, you may need to implement a different auth flow
-      throw new Error('Email signup not yet implemented for mobile');
+      // For mobile, we need to extract user from the session
+      // Call auth.me to get the current user after signup
+      const meResponse = await axios.get(
+        `${API_BASE_URL}/trpc/auth.me`,
+        { withCredentials: true }
+      );
+      
+      const user = meResponse.data?.result?.data;
+      if (!user) {
+        throw new Error('Failed to retrieve user after signup');
+      }
+
+      // Create a JWT token for mobile (since mobile can't use session cookies effectively)
+      const token = btoa(JSON.stringify({ openId: user.openId, email: user.email }));
+      await this.storeAuth(user, token);
+      return { user, token };
     } catch (error) {
       console.error('Sign-up failed:', error);
       throw error;
