@@ -1,7 +1,15 @@
 #!/bin/bash
-# This hook runs before the build and preserves our custom icon
+set -e
 
-# Copy our custom icon to a temporary location
-cp -r ios/JIMMI/Images.xcassets/AppIcon.appiconset /tmp/jimmi-icon-backup
+echo "🎯 Replacing Expo icon with JIMMI logo..."
 
-echo "✅ Icon backed up before prebuild"
+APPICON_DIR="ios/JIMMI/Images.xcassets/AppIcon.appiconset"
+
+if [ -d "$APPICON_DIR" ]; then
+  echo "Found AppIcon directory: $APPICON_DIR"
+  cp assets/images/icon.png "$APPICON_DIR/icon-120.png"
+  cp assets/images/icon.png "$APPICON_DIR/icon-1024.png"
+  echo "✅ JIMMI logo injected!"
+else
+  echo "⚠️  AppIcon directory not found yet"
+fi

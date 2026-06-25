@@ -1,13 +1,12 @@
 {
   "build": {
     "production": {
-      "ios": {
-        "buildType": "archive"
-      },
-      "prebuild": true
+      "ios": {}
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "ios": {}
+    }
   }
 }

@@ -1,0 +1,5 @@
+{
+  "build": {
+    "preBuild": "./eas-build-pre-install.sh"
+  }
+}
