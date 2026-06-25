@@ -3,6 +3,7 @@
   "displayName": "JIMMI",
   "version": "1.0.0",
   "slug": "jimmi",
+  "icon": "./assets/images/icon.png",
   "ios": {
     "bundleIdentifier": "com.jimmi.ios",
     "supportsTablet": true,
@@ -14,6 +15,9 @@
   "android": {
     "package": "com.jimmi.android"
   },
+  "plugins": [
+    "./plugins/withCustomAppIcon"
+  ],
   "extra": {
     "eas": {
       "projectId": "25cdf28c-c0b4-4784-82a7-d5fafda8be9c"
