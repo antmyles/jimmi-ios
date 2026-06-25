@@ -2,12 +2,15 @@
   "name": "JIMMI",
   "displayName": "JIMMI",
   "version": "1.0.0",
+  "slug": "jimmi",
   "ios": {
+    "bundleIdentifier": "com.jimmi.ios",
     "icon": "./assets/images/icon.png",
     "supportsTablet": true,
     "buildNumber": "21"
   },
   "android": {
+    "package": "com.jimmi.android",
     "icon": "./assets/images/icon.png"
   }
 }
