@@ -3,15 +3,20 @@
   "displayName": "JIMMI",
   "version": "1.0.0",
   "slug": "jimmi",
-  "icon": "./assets/images/icon.png",
   "ios": {
     "bundleIdentifier": "com.jimmi.ios",
-    "icon": "./assets/images/icon.png",
     "supportsTablet": true,
-    "buildNumber": "22"
+    "buildNumber": "24",
+    "infoPlist": {
+      "ITSAppUsesNonExemptEncryption": false
+    }
   },
   "android": {
-    "package": "com.jimmi.android",
-    "icon": "./assets/images/icon.png"
+    "package": "com.jimmi.android"
+  },
+  "extra": {
+    "eas": {
+      "projectId": "25cdf28c-c0b4-4784-82a7-d5fafda8be9c"
+    }
   }
 }
