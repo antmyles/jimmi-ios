@@ -1,26 +1,7 @@
 {
-  "expo": {
-    "name": "JIMMI",
-    "slug": "jimmi",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-    "userInterfaceStyle": "light",
-    "ios": {
-      "supportsTabletMode": true,
-      "bundleIdentifier": "com.jimmi.ios",
-      "buildNumber": "29",
-      "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
-      }
-    },
-    "extra": {
-      "eas": {
-        "projectId": "25cdf28c-c0b4-4784-82a7-d5fafda8be9c"
-      }
-    },
-    "android": {
-      "package": "com.jimmi.ios"
-    }
+  "name": "JIMMI",
+  "displayName": "JIMMI",
+  "ios": {
+    "icon": "./assets/images/icon.png"
   }
 }
