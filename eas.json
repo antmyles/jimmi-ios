@@ -2,8 +2,12 @@
   "build": {
     "production": {
       "ios": {
-        "distribution": "store"
-      }
+        "buildType": "archive"
+      },
+      "prebuild": true
     }
+  },
+  "submit": {
+    "production": {}
   }
 }

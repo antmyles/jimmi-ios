@@ -1,7 +1,6 @@
 {
   "name": "JIMMI",
   "displayName": "JIMMI",
-  "ios": {
-    "icon": "./assets/images/icon.png"
-  }
+  "ios": {"icon": "./assets/images/icon.png", "supportsTablet": true},
+  "android": {"icon": "./assets/images/icon.png"}
 }
