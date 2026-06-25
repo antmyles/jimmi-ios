@@ -3,11 +3,12 @@
   "displayName": "JIMMI",
   "version": "1.0.0",
   "slug": "jimmi",
+  "icon": "./assets/images/icon.png",
   "ios": {
     "bundleIdentifier": "com.jimmi.ios",
     "icon": "./assets/images/icon.png",
     "supportsTablet": true,
-    "buildNumber": "21"
+    "buildNumber": "22"
   },
   "android": {
     "package": "com.jimmi.android",
