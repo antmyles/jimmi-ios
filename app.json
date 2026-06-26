@@ -9,7 +9,11 @@
     "supportsTablet": true,
     "buildNumber": "24",
     "infoPlist": {
-      "ITSAppUsesNonExemptEncryption": false
+      "ITSAppUsesNonExemptEncryption": false,
+      "NSCameraUsageDescription": "JIMMI needs camera access to scan food items and take photos for meal tracking.",
+      "NSMicrophoneUsageDescription": "JIMMI needs microphone access for voice input and meal logging.",
+      "NSPhotoLibraryUsageDescription": "JIMMI needs access to your photo library to select images for meal tracking.",
+      "NSPhotoLibraryAddOnlyUsageDescription": "JIMMI needs permission to save photos to your library."
     }
   },
   "android": {
