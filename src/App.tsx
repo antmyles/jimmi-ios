@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { useAuthStore } from './hooks/useAuthStore';
+import { useAppleHealth } from './hooks/useAppleHealth';
 import { LoginScreen } from './screens/LoginScreen';
 import { HomeScreen } from './screens/HomeScreen';
 
@@ -13,6 +14,10 @@ export default function App() {
     // Check if user is already authenticated on app startup
     checkAuth();
   }, [checkAuth]);
+
+  // Apple Health integration — active when user is logged in
+  // isConnected will be false until user explicitly connects in Integrations tab
+  useAppleHealth(false); // placeholder: replace false with real connection state once available
 
   if (isLoading) {
     return (

@@ -20,7 +20,23 @@
     "package": "com.jimmi.android"
   },
   "plugins": [
-    "./plugins/withCustomAppIcon"
+    "./plugins/withCustomAppIcon",
+    [
+      "@kingstinct/react-native-healthkit",
+      {
+        "NSHealthShareUsageDescription": "JIMMI uses your Apple Health data including workouts, calorie burn, heart rate, and activity to provide personalized coaching and track your fitness progress.",
+        "NSHealthUpdateUsageDescription": "JIMMI may save workout summaries to Apple Health to keep your health data in sync.",
+        "background": true
+      }
+    ],
+    [
+      "expo-notifications",
+      {
+        "icon": "./assets/images/icon.png",
+        "color": "#000000",
+        "sounds": []
+      }
+    ]
   ],
   "extra": {
     "eas": {

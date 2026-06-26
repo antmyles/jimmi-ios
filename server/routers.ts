@@ -14,6 +14,8 @@ import { estimateRestaurantMacros } from "./restaurantNutrition";
 import { createOuraAuthorizationUrl, isOuraConfigured, OURA_REDIRECT_URI, OURA_SCOPES } from "./oura";
 import { createWhoopAuthorizationUrl, isWhoopConfigured, WHOOP_REDIRECT_URI, WHOOP_SCOPES, WHOOP_WEBHOOK_URL } from "./whoop";
 import { buildGoogleHealthAuthUrl, GOOGLE_HEALTH_REDIRECT_URI, GOOGLE_HEALTH_SCOPES, isGoogleHealthConfigured } from "./google-health";
+import { connectAppleHealth, disconnectAppleHealth, getAppleHealthConnection, saveAppleHealthCalories, pruneOldAppleHealthData } from "./apple-health";
+import { connectAppleHealth, disconnectAppleHealth, getAppleHealthConnection, saveAppleHealthCalories, pruneOldAppleHealthData } from "./apple-health";
 import { systemRouter } from "./_core/systemRouter";
 import { adminProcedure, protectedProcedure, publicProcedure, router } from "./_core/trpc";
 import { getSportSpecificPrompt } from "./sport-specific-prompts";
@@ -2163,6 +2165,50 @@ export const appRouter = router({
       beta: true,
     })),
     disconnectFitbitConnection: protectedProcedure.mutation(async ({ ctx }) => disconnectGoogleHealthConnection(ctx.user.id)),
+    appleHealthSyncStatus: protectedProcedure.query(async ({ ctx }) => {
+      const conn = await getAppleHealthConnection(ctx.user.id);
+      return {
+        provider: "apple_health",
+        connected: conn?.status === "connected",
+        status: conn?.status ?? "disconnected",
+        lastSyncedAt: conn?.lastSyncedAt ?? null,
+        readyForMetricSync: conn?.status === "connected",
+      };
+    }),
+    connectAppleHealth: protectedProcedure.mutation(async ({ ctx }) => {
+      const settings = await getAccountSettings(ctx.user.id);
+      if (!tierAtLeast(settings.planTier as string, "pro")) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Apple Health integration requires a Pro or Elite subscription." });
+      }
+      await connectAppleHealth(ctx.user.id);
+      return { success: true };
+    }),
+    disconnectAppleHealth: protectedProcedure.mutation(async ({ ctx }) => {
+      await disconnectAppleHealth(ctx.user.id);
+      return { success: true };
+    }),
+    syncAppleHealthCalories: protectedProcedure
+      .input(z.object({
+        logDate: z.string(),
+        activeCalories: z.number().nonnegative(),
+        restingCalories: z.number().nonnegative(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        const settings = await getAccountSettings(ctx.user.id);
+        if (!tierAtLeast(settings.planTier as string, "pro")) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Apple Health integration requires a Pro or Elite subscription." });
+        }
+        const conn = await getAppleHealthConnection(ctx.user.id);
+        await saveAppleHealthCalories(
+          ctx.user.id,
+          input.logDate,
+          input.activeCalories,
+          input.restingCalories,
+          conn?.id
+        );
+        await pruneOldAppleHealthData(ctx.user.id);
+        return { success: true, totalCalories: input.activeCalories + input.restingCalories };
+      }),
     fitbitSyncStatus: protectedProcedure.query(async ({ ctx }) => {
       const state = await getWearableConnectionState(ctx.user.id);
       return {

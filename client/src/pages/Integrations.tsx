@@ -48,6 +48,20 @@ const providers = [
     connectedLabel: "Reconnect Fitbit",
     available: true,
   },
+  {
+    id: "apple_health",
+    name: "Apple Health",
+    category: "Wearable platforms",
+    logoKind: "wordmark",
+    logoText: "",
+    logoClass: "bg-red-500/15 text-red-400",
+    description: "Connect Apple Health so JIMMI can read your calorie burn, workouts, heart rate, steps, and sleep directly from your iPhone and Apple Watch — no manual logging needed.",
+    detailCopy: "Apple Health aggregates data from your iPhone, Apple Watch, and any connected apps. When you connect it, JIMMI can automatically pull your calorie burn after every workout and sync it to your calorie tracker — so your deficit or surplus is always accurate. You will see a native iOS permission dialog to grant access.",
+    bullets: ["Automatic calorie burn sync after workouts", "Steps, heart rate, and sleep data", "Real-time workout notifications"],
+    connectLabel: "Connect Apple Health",
+    connectedLabel: "Disconnect Apple Health",
+    available: true,
+  },
 ] as const;
 
 type ProviderId = (typeof providers)[number]["id"];
@@ -106,6 +120,9 @@ export default function Integrations() {
   const disconnectOuraConnection = trpc.account.disconnectOuraConnection.useMutation({ onSuccess: async () => utils.account.wearableState.invalidate() });
   const disconnectWhoopConnection = trpc.account.disconnectWhoopConnection.useMutation({ onSuccess: async () => utils.account.wearableState.invalidate() });
   const disconnectFitbitConnection = trpc.account.disconnectFitbitConnection.useMutation({ onSuccess: async () => utils.account.wearableState.invalidate() });
+  const appleHealthStatusQuery = trpc.account.appleHealthSyncStatus.useQuery(undefined, { enabled: Boolean(user), retry: false });
+  const connectAppleHealthMutation = trpc.account.connectAppleHealth.useMutation({ onSuccess: async () => { utils.account.wearableState.invalidate(); appleHealthStatusQuery.refetch(); } });
+  const disconnectAppleHealthMutation = trpc.account.disconnectAppleHealth.useMutation({ onSuccess: async () => { utils.account.wearableState.invalidate(); appleHealthStatusQuery.refetch(); } });
 
   const activeProfile = profileQuery.data ?? localProfile;
   const isLocalFallback = !user && Boolean(activeProfile);
@@ -121,12 +138,14 @@ export default function Integrations() {
     if (providerId === "oura") startOuraConnection.mutate();
     if (providerId === "whoop") startWhoopConnection.mutate();
     if (providerId === "fitbit") startFitbitConnection.mutate();
+    if (providerId === "apple_health") connectAppleHealthMutation.mutate();
   };
 
   const disconnectConnection = (providerId: ProviderId) => {
     if (providerId === "oura") disconnectOuraConnection.mutate();
     if (providerId === "whoop") disconnectWhoopConnection.mutate();
     if (providerId === "fitbit") disconnectFitbitConnection.mutate();
+    if (providerId === "apple_health") disconnectAppleHealthMutation.mutate();
   };
 
   if (loading || (Boolean(user) && profileQuery.isLoading)) {
@@ -140,10 +159,12 @@ export default function Integrations() {
   }
 
   if (selectedProvider) {
-    const isConnected = wearable.connected && wearable.provider === selectedProvider.id;
-    const isPending = selectedProvider.id === "oura" ? startOuraConnection.isPending : selectedProvider.id === "whoop" ? startWhoopConnection.isPending : startFitbitConnection.isPending;
-    const isDisconnectPending = selectedProvider.id === "oura" ? disconnectOuraConnection.isPending : selectedProvider.id === "whoop" ? disconnectWhoopConnection.isPending : disconnectFitbitConnection.isPending;
-    const isConfigured = selectedProvider.id === "oura" ? ouraSetupQuery.data?.configured : selectedProvider.id === "whoop" ? whoopSetupQuery.data?.configured : fitbitSetupQuery.data?.configured;
+    const isConnected = selectedProvider.id === "apple_health"
+      ? appleHealthStatusQuery.data?.connected === true
+      : wearable.connected && wearable.provider === selectedProvider.id;
+    const isPending = selectedProvider.id === "oura" ? startOuraConnection.isPending : selectedProvider.id === "whoop" ? startWhoopConnection.isPending : selectedProvider.id === "fitbit" ? startFitbitConnection.isPending : connectAppleHealthMutation.isPending;
+    const isDisconnectPending = selectedProvider.id === "oura" ? disconnectOuraConnection.isPending : selectedProvider.id === "whoop" ? disconnectWhoopConnection.isPending : selectedProvider.id === "fitbit" ? disconnectFitbitConnection.isPending : disconnectAppleHealthMutation.isPending;
+    const isConfigured = selectedProvider.id === "oura" ? ouraSetupQuery.data?.configured : selectedProvider.id === "whoop" ? whoopSetupQuery.data?.configured : selectedProvider.id === "fitbit" ? fitbitSetupQuery.data?.configured : true;
     const canConnect = Boolean(user) && selectedProvider.available && Boolean(isConfigured);
 
     return (
