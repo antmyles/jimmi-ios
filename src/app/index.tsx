@@ -13,12 +13,24 @@ const INTERNAL_DOMAINS = [
 
 // OAuth / payment domains that must navigate inside the WebView (not opened externally)
 const OAUTH_DOMAINS = [
+  // Manus login portal (JIMMI sign-in)
+  'manus.im',
+  'api.manus.im',
+  // Google (Sign-In + Google Health / Fitbit)
   'accounts.google.com',
+  'oauth2.googleapis.com',
+  // Oura
   'cloud.ouraring.com',
+  'ouraring.com',
+  // WHOOP
   'api.prod.whoop.com',
+  'whoop.com',
+  // Fitbit / Google Health
   'www.fitbit.com',
   'fitbit.com',
+  // Stripe checkout
   'checkout.stripe.com',
+  'stripe.com',
 ];
 
 function isInternalUrl(url: string): boolean {
