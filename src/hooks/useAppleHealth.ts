@@ -10,11 +10,11 @@ import {
   getTodayDateString,
 } from "../services/appleHealth";
 
-const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || "http://localhost:3000/api";
+const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || "https://askjimmi.com/api";
 
 // Configure notification handler once
 Notifications.setNotificationHandler({
-  handleNotification: async ( ) => ({
+  handleNotification: async () => ({
     shouldShowAlert: true,
     shouldPlaySound: true,
     shouldSetBadge: false,
@@ -36,15 +36,21 @@ async function syncCaloriesToBackend(
   activeCalories: number,
   restingCalories: number
 ): Promise<void> {
+  // Build headers — prefer shared WebView cookie (credentials: include),
+  // fall back to Bearer token for native Google/Apple sign-in flows
   const token = await getAuthToken();
-  if (!token) return;
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+  };
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
   try {
     await fetch(`${API_BASE_URL}/trpc/account.syncAppleHealthCalories`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
+      credentials: "include", // sends shared WebView cookie automatically on iOS
+      headers,
       body: JSON.stringify({
         json: { logDate, activeCalories, restingCalories },
       }),
